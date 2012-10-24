@@ -3,7 +3,7 @@
 
 #include <EasyRTMPBase.h>
 #include "../../utils/libEasySource/BaseSource.h"
-#include "../../utils/libEasySrcLDR/SourceLoader.h"
+#include "../../utils/libEasySourceLDR/SourceLoader.h"
 
 #ifdef __cplusplus
 extern "C" {

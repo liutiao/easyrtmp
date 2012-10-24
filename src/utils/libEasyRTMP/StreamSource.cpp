@@ -7,7 +7,7 @@
 static const char* TAG = "StreamSource";
 
 #ifdef _DEBUG
-#pragma comment(lib, "libEasySrcLDRd.lib")
+#pragma comment(lib, "libEasySourceLDRd.lib")
 #pragma comment(lib, "libEasySourceD.lib")
 //#pragma comment(lib, "librtmpd.lib")
 //#pragma comment(lib, "../../bin_debug/zlibd.lib")
@@ -17,7 +17,7 @@ static const char* TAG = "StreamSource";
 //#pragma comment(lib, "../../bin_debug/libcapaudio.lib")
 //#pragma comment(lib, "../../bin_debug/libEzCodec.lib")
 #else
-#pragma comment(lib, "libEasySrcLDR.lib")
+#pragma comment(lib, "libEasySourceLDR.lib")
 #pragma comment(lib, "libEasySource.lib")
 //#pragma comment(lib, "librtmp.lib")
 //#pragma comment(lib, "../../bin/libEzCodec.lib")

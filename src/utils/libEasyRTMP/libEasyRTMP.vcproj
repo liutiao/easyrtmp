@@ -150,7 +150,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="../../lib;../../../../RsCommon/DirectShow/lib"
+				AdditionalLibraryDirectories="../../lib;../../../bin"
 				ModuleDefinitionFile=".\libEasyRTMP.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
