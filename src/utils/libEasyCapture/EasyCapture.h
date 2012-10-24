@@ -2,8 +2,6 @@
 #define __RG4_VIDEO_CAPTURE_INSTANCE_H_____
 
 #include "../libEasySource/BaseSource.h"
-//#include "../../common/EzStreamSvr/EzBase.h"
-//#include "../../utils/libV4R/V4R.h"
 #include "V4R.h"
 
 #define _USE_WAVEIN

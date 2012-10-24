@@ -11,11 +11,11 @@ static int av_log_level = AV_LOG_WARNING;
 #include "../libRsWaveIN/EzCaptureA.h"
 
 #ifdef _DEBUG
-#pragma comment(lib, "../bin/libRsWaveINd.lib")
-#pragma comment(lib, "../bin/libEasySourced.lib")
+#pragma comment(lib, "libRsWaveINd.lib")
+#pragma comment(lib, "libEasySourced.lib")
 #else
-#pragma comment(lib, "../bin/libRsWaveIN.lib")
-#pragma comment(lib, "../bin/libEasySource.lib")
+#pragma comment(lib, "libRsWaveIN.lib")
+#pragma comment(lib, "libEasySource.lib")
 #endif
 #endif
 

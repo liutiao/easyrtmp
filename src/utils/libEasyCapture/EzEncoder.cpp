@@ -6,7 +6,6 @@
 extern pthread_mutex_t	g_vFFMPEGLock;
 extern BOOL_ s_bFFMPGELock;
 
-
 static int av_log_level = AV_LOG_WARNING;
 
 void dddd(void* ptr, int level, const char* fmt, va_list vl)
@@ -78,7 +77,9 @@ CEzEncoder::CEzEncoder()
 	m_pVideoStream		= NULL;
 
 	//filter
+#ifdef __RG4_ENABLE_WATERMARK
 	m_pRsFilter			= NULL;
+#endif
 }
 
 CEzEncoder::~CEzEncoder()
@@ -223,11 +224,12 @@ int CEzEncoder::VideoEncodeFrame(uint8_t* pSrcData, int nSrcBytes, int nSrcPixFm
 		int nRet = sws_scale(m_pSwsContext, src, srcStride, 0, nSrcImageHeight, m_pPicture->data, m_pPicture->linesize);
 		int out_size;
 
+#ifdef __RG4_ENABLE_WATERMARK
 		if (m_pRsFilter)
 		{
 			m_pRsFilter->FilterFrame(m_pPicture, m_pPicture->width, m_pPicture->height);
 		}
-
+#endif
 		out_size = avcodec_encode_video(
 			m_pContextVE, 
 			m_pVideoEncBuffer,
@@ -540,8 +542,8 @@ BOOL_ CEzEncoder::VideoEncoderInitialize(int nCodecID, int nImageWidth, int nIma
 
 	m_nVCodecID			= nCodecID;
 	//m_nStreamType		= nStreamType;
+#ifdef __RG4_ENABLE_WATERMARK
 	m_pRsFilter			= new CRsFilter();
-
 	if (m_bTextOSD || m_bTimeOSD)
 	{
 		if (!m_pRsFilter->InitFilter(PIX_FMT_YUV420P, nImageWidth, nImageHeight, nFrameRate, m_pContextVE->sample_aspect_ratio.num/m_pContextVE->sample_aspect_ratio.den, m_bTimeOSD, m_bTextOSD, m_strOSDFilter.c_str()))
@@ -552,7 +554,8 @@ BOOL_ CEzEncoder::VideoEncoderInitialize(int nCodecID, int nImageWidth, int nIma
 			m_pRsFilter = NULL;
 		}
 	}
-	
+#endif
+
 	return TRUE_;
 }
 
@@ -560,6 +563,7 @@ BOOL_ CEzEncoder::VideoEncoderDestroy()
 {
 	//////////////////////////////////////////////////////////////////////////
 	//filter
+#ifdef __RG4_ENABLE_WATERMARK
 	BOOL_ bFreePicture = TRUE_;
 	if (m_pRsFilter)
 	{
@@ -567,7 +571,7 @@ BOOL_ CEzEncoder::VideoEncoderDestroy()
 		delete m_pRsFilter;
 		m_pRsFilter = NULL;
 	}
-
+#endif
 	if (m_pContextVE)
 	{
 		pthread_mutex_lock(&g_vFFMPEGLock);
@@ -578,11 +582,14 @@ BOOL_ CEzEncoder::VideoEncoderDestroy()
 	}
 	if (m_pPicture)
 	{
+#ifdef __RG4_ENABLE_WATERMARK
 		if (bFreePicture)
+#endif
 		{
 			if (m_pPicture->data[0])
 				free(m_pPicture->data[0]);
 		}
+
 		av_free(m_pPicture);
 		m_pPicture = NULL;
 	}

@@ -10,7 +10,10 @@
 
 #include "Codec.h"
 #include <pthread.h>
+
+#ifdef __RG4_ENABLE_WATERMARK
 #include "RsFilter.h"
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -98,7 +101,9 @@ private:
 
 	//////////////////////////////////////////////////////////////////////////
 	//Filter
+#ifdef __RG4_ENABLE_WATERMARK
 	CRsFilter*			m_pRsFilter;
+#endif
 	//////////////////////////////////////////////////////////////////////////
 //public:
 //	static char			TAG[32];
