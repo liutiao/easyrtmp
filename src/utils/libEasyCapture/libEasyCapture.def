@@ -1,6 +1,0 @@
-; libEasyCapture.def : Declares the module parameters for the DLL.
-
-LIBRARY      "libEasyCapture"
-
-EXPORTS
-    ; Explicit exports can go here
